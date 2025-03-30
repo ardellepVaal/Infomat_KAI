@@ -1,0 +1,75 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+    color: #2c3e50;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1, h2 {
+    color: #2c3e50;
+    font-weight: 700;
+}
+
+.card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+#kai-map {
+    height: 500px;
+    width: 100%;
+    border-radius: 8px;
+    z-index: 1;
+}
+
+.transport-icon {
+    background-color: #3498db;
+    border-radius: 50%;
+    padding: 3px 6px;
+    color: white;
+    font-size: 12px;
+    margin-right: 5px;
+}
+
+.leaflet-popup-content {
+    min-width: 200px;
+}
+
+.leaflet-popup-content b {
+    color: #3498db;
+}
+
+.leaflet-popup-content small {
+    display: block;
+    margin: 5px 0;
+}
+
+.building-marker {
+    background-color: #3498db;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    line-height: 24px;
+    border: 2px solid white;
+}
+
+@media (max-width: 768px) {
+    #kai-map {
+        height: 350px;
+    }
+    
+    .container {
+        padding: 15px;
+    }
+}

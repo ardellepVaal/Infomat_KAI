@@ -1,0 +1,115 @@
+/* Базовые стили */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7f6; /* Чуть более теплый фон для лучшего восприятия */
+    color: #2c3e50;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 30px;
+    background: #ffffff; /* Белый фон для контента */
+    border-radius: 10px; /* Закругленные углы для контейнера */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Тень вокруг контейнера */
+}
+
+h1 {
+    color: #2c3e50;
+    font-weight: 700;
+    font-size: 2.4rem; /* Чуть больший размер заголовка */
+    margin-bottom: 1.8rem;
+    text-align: center;
+    text-transform: uppercase; /* Заглавные буквы для заголовка */
+    letter-spacing: 1px; /* Немного разреженные буквы для эффекта */
+}
+
+/* Секция поиска */
+.search-section {
+    background: linear-gradient(135deg, #3498db, #8e44ad); /* Градиентный фон */
+    padding: 20px;
+    border-radius: 12px; /* Более округлые углы */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* Добавление тени */
+    margin-bottom: 30px;
+}
+
+.search-options {
+    display: flex;
+    justify-content: center;
+}
+
+.search-options input {
+    width: 70%; /* Больше пространства для строки поиска */
+    padding: 12px 18px;
+    font-size: 1.1rem;
+    border-radius: 50px; /* Округлый стиль для поиска */
+    border: 2px solid #3498db;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.search-options input:focus {
+    border-color: #1d78c0;
+    box-shadow: 0 0 8px rgba(52, 152, 219, 0.4);
+}
+
+.search-options input::placeholder {
+    color: #ffffff;
+    font-style: italic;
+}
+
+/* Список вопросов */
+.faq-list {
+    padding: 20px;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.faq-item {
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #3498db;
+    border-radius: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer; /* Курсор меняется на указатель, чтобы указать интерактивность */
+}
+
+.faq-item:hover {
+    transform: translateY(-5px); /* Легкое поднятие при наведении */
+    box-shadow: 0 8px 20px rgba(52, 152, 219, 0.2);
+}
+
+.question {
+    color: #3498db;
+    font-size: 1.4rem; /* Увеличенный размер шрифта для вопросов */
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.answer p {
+    margin-bottom: 0;
+    color: #555;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+/* Адаптивность */
+@media (max-width: 576px) {
+    .container {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 2rem; /* Уменьшение размера заголовка на маленьких экранах */
+    }
+
+    .question {
+        font-size: 1.2rem; /* Уменьшение шрифта вопроса на маленьких экранах */
+    }
+
+    .search-options input {
+        width: 100
+    }
+}

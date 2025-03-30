@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Расписание преподавателя</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            margin: 0;
+            padding: 15px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+        
+        /* Стили для формы поиска */
+        .search-container {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 25px;
+            background-color: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .search-hint {
+            color: #666;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        .search-input {
+            display: flex;
+            gap: 10px;
+        }
+        #teacherInput {
+            flex: 1;
+            padding: 10px 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+        #teacherInput:focus {
+            border-color: #0C0CED;
+            outline: none;
+        }
+        #searchButton {
+            padding: 10px 15px;
+            background-color: #0C0CED;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: background-color 0.3s;
+        }
+        #searchButton:hover {
+            background-color: #0a0ac5;
+        }
+        
+        /* Стили для профиля преподавателя */
+        .teacher-profile {
+            display: flex;
+            flex-direction: column;
+            margin-top: 15px;
+            padding: 15px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .teacher-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 4px;
+            object-fit: cover;
+            margin-bottom: 15px;
+            align-self: center;
+            border: none;
+        }
+        .teacher-name {
+            font-size: 20px;
+            margin: 0 0 5px 0;
+            color: #333;
+        }
+        .teacher-position {
+            color: #666;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+        .teacher-contacts {
+            margin-top: 12px;
+            line-height: 1.5;
+            color: #444;
+            font-size: 14px;
+        }
+        
+        /* Переключатель недель */
+        .week-switcher {
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            background-color: white;
+            padding: 12px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            flex-wrap: wrap;
+        }
+        .week-btn {
+            padding: 8px 15px;
+            background: #e0e0e0;
+            border: none;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.3s;
+        }
+        .week-btn.active {
+            background: #0C0CED;
+            color: white;
+        }
+        .week-btn:first-child {
+            border-radius: 6px 0 0 6px;
+        }
+        .week-btn:last-child {
+            border-radius: 0 6px 6px 0;
+        }
+        .week-info {
+            margin-left: 10px;
+            color: #666;
+            font-size: 13px;
+            margin-top: 5px;
+            width: 100%;
+        }
+        
+        /* Стили для таблицы расписания */
+        .schedule-day {
+            margin-bottom: 20px;
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            overflow-x: auto;
+        }
+        .day-title {
+            color: #333;
+            margin-top: 0;
+            margin-bottom: 10px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+            font-size: 18px;
+        }
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            font-size: 13px;
+        }
+        .schedule-table th {
+            background-color: #0C0CED;
+            color: white;
+            padding: 8px;
+            text-align: left;
+            font-weight: normal;
+        }
+        .schedule-table td {
+            padding: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        .schedule-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .schedule-table tr:hover {
+            background-color: #f0f0f0;
+        }
+        .time {
+            color: #0C0CED;
+            white-space: nowrap;
+        }
+        .building-room {
+            white-space: nowrap;
+        }
+        
+        .hidden {
+            display: none;
+        }
+
+        /* Адаптивные стили */
+        @media (max-width: 767px) {
+            .search-input {
+                flex-direction: column;
+            }
+            #searchButton {
+                width: 100%;
+            }
+            .teacher-avatar {
+                width: 80px;
+                height: 80px;
+            }
+            .week-switcher {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .week-btn {
+                border-radius: 6px !important;
+                margin-bottom: 5px;
+            }
+            .week-info {
+                margin-left: 0;
+                margin-top: 8px;
+            }
+            .schedule-table {
+                font-size: 12px;
+            }
+            .schedule-table th,
+            .schedule-table td {
+                padding: 6px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="search-container">
+            <div class="search-hint">Поиск по ФИО или предмету</div>
+            <div class="search-input">
+                <input type="text" 
+                       id="teacherInput"
+                       name="teacher" 
+                       placeholder="Например: Иванов И.И. или Математика"
+                       required>
+                <button type="submit" id="searchButton">Найти</button>
+            </div>
+        </div>
+
+        <!-- Блок с информацией о преподавателе (изначально скрыт) -->
+        <div id="teacherInfo" class="hidden">
+            <div class="teacher-profile">
+                <img src="img/retired_educator.jpeg" alt="Фото преподавателя" class="teacher-avatar">
+                <div class="teacher-info">
+                    <h1 class="teacher-name">Иванов Иван Иванович</h1>
+                    <div class="teacher-position">Доцент кафедры Прикладной математики</div>
+                    
+                    <div class="teacher-contacts">
+                        Email: ivanov@university.edu<br>
+                        Телеграм: @ivanov_teacher<br>
+                        WhatsApp: +7(912)345-67-89
+                    </div>
+                </div>
+            </div>
+
+            <div class="week-switcher">
+                <button class="week-btn active">Чётная неделя</button>
+                <button class="week-btn">Нечётная неделя</button>
+                <span class="week-info">Сегодня нечетная неделя</span>
+            </div>
+
+            <!-- Понедельник -->
+            <div class="schedule-day">
+                <h2 class="day-title">Понедельник</h2>
+                <table class="schedule-table">
+                    <tr>
+                        <th>Время</th>
+                        <th>Здание-аудитория</th>
+                        <th>Вид занятия</th>
+                        <th>Предмет</th>
+                        <th>Дата</th>
+                        <th>Группа</th>
+                    </tr>
+                    <tr>
+                        <td class="time">09:00-10:30</td>
+                        <td class="building-room">Главный-310</td>
+                        <td>Лекция</td>
+                        <td>Высшая математика</td>
+                        <td>12.04.2023</td>
+                        <td>М-101</td>
+                    </tr>
+                    <tr>
+                        <td class="time">10:40-12:10</td>
+                        <td class="building-room">2 корпус-415</td>
+                        <td>Практика</td>
+                        <td>Прикладная математика</td>
+                        <td>12.04.2023</td>
+                        <td>ПМ-202</td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- Вторник -->
+            <div class="schedule-day">
+                <h2 class="day-title">Вторник</h2>
+                <table class="schedule-table">
+                    <tr>
+                        <th>Время</th>
+                        <th>Здание-аудитория</th>
+                        <th>Вид занятия</th>
+                        <th>Предмет</th>
+                        <th>Дата</th>
+                        <th>Группа</th>
+                    </tr>
+                    <tr>
+                        <td class="time">08:00-09:30</td>
+                        <td class="building-room">Главный-305</td>
+                        <td>Лекция</td>
+                        <td>Теория алгоритмов</td>
+                        <td>13.04.2023</td>
+                        <td>ПМ-202</td>
+                    </tr>
+                    <tr>
+                        <td class="time">11:20-12:50</td>
+                        <td class="building-room">2 корпус-420</td>
+                        <td>Лабораторная</td>
+                        <td>Математический анализ</td>
+                        <td>13.04.2023</td>
+                        <td>М-101</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('searchButton').addEventListener('click', function(e) {
+            e.preventDefault(); // Отменяем стандартную отправку формы
+            
+            const teacherInfo = document.getElementById('teacherInfo');
+            const inputValue = document.getElementById('teacherInput').value.trim();
+            
+            if (inputValue.length > 0) {
+                teacherInfo.classList.remove('hidden');
+                // Прокручиваем к результатам
+                teacherInfo.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+
+        // Переключение между неделями
+        document.querySelectorAll('.week-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.week-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+/* Базовые стили */
+body {
+    background: #f8f9fa;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Карточки */
+.info-card {
+    background: white;
+    border: 1px solid #dee2e6;
+    border-radius: 12px;
+    padding: 25px;
+    margin: 10px;
+    min-height: 250px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    text-align: center;
+}
+
+.info-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+/* Остальные стили */
+.card-link {
+    text-decoration: none !important;
+    color: inherit;
+    display: block;
+}
+
+.card-list {
+    list-style: none;
+    padding-left: 0;
+    text-align: left;
+}
+
+.card-list li {
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+    font-size: 0.95rem;
+}
+
+/* Цвета иконок */
+.icon-blue { color: #007bff; }
+.icon-green { color: #28a745; }
+.icon-red { color: #dc3545; }
+.icon-purple { color: #6f42c1; }
+.icon-orange { color: #fd7e14; }
+.icon-teal { color: #20c997; }
+.icon-brown { color: #8b4513; }
+.icon-pink { color: #e83e8c; }
+
+/* Психологическая помощь */
+.info-card.emergency {
+    background: #fff3cd;
+    border: 2px solid #ffeeba;
+    max-width: 600px;
+    margin: 20px auto !important;
+}
+
+/* Адаптация для мобильных */
+@media (max-width: 768px) {
+    .info-card {
+        min-height: auto;
+        margin: 10px 0;
+    }
+}
+
+.lang-bar {
+    background: #ffffff;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.container {
+    max-width: 1140px;
+}

@@ -1,0 +1,78 @@
+/* styles3.css */
+body {
+    background-color: #f9f9f9;
+    color: #333;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    padding: 30px;
+}
+
+.logo {
+    width: 150px;
+    margin-bottom: 15px;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 30px 0;
+}
+
+button, select {
+    background: #ddd;
+    color: #333;
+    border: none;
+    padding: 15px 25px;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button.active {
+    background: #007bff;
+    color: white;
+}
+
+.vacancy-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    gap: 30px;
+    padding: 50px;
+}
+
+.vacancy-card {
+    background: #007bff;
+    color: white;
+    padding: 35px;
+    border-radius: 10px;
+    font-size: 22px;
+}
+
+.contact-info, .contact-info-extra {
+    background: #007bff;
+    color: white;
+    padding: 30px;
+    border-radius: 10px;
+    margin: 40px auto;
+    width: 80%;
+    font-size: 20px;
+}
+
+.contact-info a, .contact-info-extra a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+footer {
+    background: #eee;
+    padding: 20px;
+    margin-top: 30px;
+    font-size: 18px;
+}
